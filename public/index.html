@@ -2,20 +2,15 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
   <title>スライドパズルゲーム</title>
 </head>
 <body>
   <h1>スライドパズルゲーム</h1>
   <p>難易度を選んでください</p>
 
-  <button onclick="startGame(3)">かんたん (3×3)</button>
-  <button onclick="startGame(4)">ふつう (4×4)</button>
-  <button onclick="startGame(5)">むずかしい (5×5)</button>
-
-  <script>
-    function startGame(level){
-      location.href = `game.html?level=${level}`;
-    }
-  </script>
+  <button onclick="location.href='easy.html'">かんたん (3×3)</button>
+  <button onclick="alert('普通レベルはまだ未実装です')">ふつう (4×4)</button>
+  <button onclick="alert('難しいレベルはまだ未実装です')">むずかしい (5×5)</button>
 </body>
 </html>

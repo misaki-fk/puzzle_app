@@ -20,7 +20,7 @@ function init() {
 
       if (i !== size * size - 1) {
         const img = document.createElement("img");
-        img.src = `${folder}/piace_${i}.jpg`;
+        img.src = `${folder}/piece_${i}.jpg`;
         td.appendChild(img);
       } else {
         td.classList.add("empty");
@@ -37,17 +37,13 @@ function init() {
 }
 
 function shuffleTiles() {
-  let blankIndex = size * size - 1;
-  const moves = [-1, 1, -size, size]; // 左右上下
-  for (let k = 0; k < 500; k++) { // 適度にシャッフル
-    const possible = moves
-      .map(m => blankIndex + m)
-      .filter(n => n >= 0 && n < size * size && !(blankIndex % size === 0 && n === blankIndex - 1) && !(blankIndex % size === size - 1 && n === blankIndex + 1));
-    const target = possible[Math.floor(Math.random() * possible.length)];
-    swap(blankIndex, target);
-    blankIndex = target;
+  for (let i = 0; i < 1000; i++) {
+    // ランダムなタイルをクリック
+    const randomIndex = Math.floor(Math.random() * (size * size));
+    clickTile({ target: { index: randomIndex } });
   }
 }
+
 
 function clickTile(e) {
   const i = e.target.index ?? e.target.parentNode.index;
@@ -84,10 +80,16 @@ function swap(i, j) {
   tiles[j].classList.remove("empty");
 }
 
+let cleared = false; // 初期はクリアしていない
+
 function checkClear() {
+  if (cleared) return; // すでにクリア済みなら何もしない
+
   for (let i = 0; i < tiles.length; i++) {
     if (tiles[i].value !== i) return;
   }
+
+  cleared = true; // 一度クリアしたらフラグを立てる
   setTimeout(() => alert("クリア！"), 100);
 }
 

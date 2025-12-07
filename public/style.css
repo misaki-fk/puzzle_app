@@ -1,0 +1,90 @@
+/* 共通フォント */
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: linear-gradient(to bottom, #66a6ff, #89f7fe); /* XP風青グラデーション */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* タイトル */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* パズルテーブル */
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+/* タイル */
+.tile {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid #007bff;
+  background-color: #fff;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* 空白タイル */
+.tile.empty {
+  background: white;
+  box-shadow: none;
+}
+
+/* タイル移動アニメーション（未来的な爽快感） */
+.tile.moving {
+  transform: translate(0,0);
+  transition: transform 0.15s cubic-bezier(0.25, 1.25, 0.5, 1);
+}
+
+/* ボタン */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+}
+
+/* クリア表示用 */
+#clearMessage {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#clearMessage.show {
+  opacity: 1;
+}
