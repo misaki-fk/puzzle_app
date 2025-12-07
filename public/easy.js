@@ -37,13 +37,17 @@ function init() {
 }
 
 function shuffleTiles() {
-  for (let i = 0; i < 1000; i++) {
-    // ランダムなタイルをクリック
-    const randomIndex = Math.floor(Math.random() * (size * size));
-    clickTile({ target: { index: randomIndex } });
+  let blankIndex = size * size - 1;
+  const moves = [-1, 1, -size, size]; // 左右上下
+  for (let k = 0; k < 500; k++) { // 適度にシャッフル
+    const possible = moves
+      .map(m => blankIndex + m)
+      .filter(n => n >= 0 && n < size * size && !(blankIndex % size === 0 && n === blankIndex - 1) && !(blankIndex % size === size - 1 && n === blankIndex + 1));
+    const target = possible[Math.floor(Math.random() * possible.length)];
+    swap(blankIndex, target);
+    blankIndex = target;
   }
 }
-
 
 function clickTile(e) {
   const i = e.target.index ?? e.target.parentNode.index;
@@ -80,17 +84,45 @@ function swap(i, j) {
   tiles[j].classList.remove("empty");
 }
 
-let cleared = false; // 初期はクリアしていない
+let cleared = false; // 一度だけクリア判定用
 
 function checkClear() {
-  if (cleared) return; // すでにクリア済みなら何もしない
+  if (cleared) return; // すでにクリア済みなら無視
 
   for (let i = 0; i < tiles.length; i++) {
     if (tiles[i].value !== i) return;
   }
 
-  cleared = true; // 一度クリアしたらフラグを立てる
-  setTimeout(() => alert("クリア！"), 100);
+  cleared = true;
+  // 0.1秒後にクリア画面に遷移
+  setTimeout(() => {
+    location.href = "clear.html?level=easy";
+  }, 100);
 }
 
 window.onload = init;
+// テスト用 即クリア関数
+const testBtn = document.getElementById("testClear");
+  if (testBtn) {
+    testBtn.onclick = () => {
+      setTilesSolved(); // 即クリア関数
+    };
+  }
+
+function setTilesSolved() {
+  for (let i = 0; i < tiles.length; i++) {
+    tiles[i].value = i;
+    const img = tiles[i].querySelector("img");
+    tiles[i].innerHTML = "";
+
+    if (i !== tiles.length - 1) {
+      if (img) tiles[i].appendChild(img);
+      tiles[i].classList.remove("empty");
+    } else {
+      tiles[i].classList.add("empty");
+    }
+  }
+
+  checkClear();
+}
+
