@@ -1,7 +1,7 @@
 "use strict";
 
-const size = 4;
-const folder = "images/normal_images";
+const size = 5;
+const folder = "images/hard_images";
 const tiles = [];
 
 function init() {
@@ -96,7 +96,7 @@ function checkClear() {
   cleared = true;
   // 0.1秒後にクリア画面に遷移
   setTimeout(() => {
-    location.href = "clear.html?level=normal";
+    location.href = "clear.html?level=hard";
   }, 100);
 }
 
