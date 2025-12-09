@@ -5,6 +5,9 @@ const folder = "images/easy_images";
 const tiles = [];
 
 function init() {
+    // ★追加：分割数を CSS に反映
+  document.documentElement.style.setProperty('--cols', size);
+
   const table = document.getElementById("table");
   table.innerHTML = "";
   tiles.length = 0;
