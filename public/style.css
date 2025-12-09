@@ -29,7 +29,7 @@ p {
 }
 
 /* パズル全体のラッパー */
-puzzleWrapper {
+#puzzleWrapper {
   width: 350px;
   height: 350px;
   margin: 20px auto;
@@ -120,10 +120,12 @@ button:hover {
   background-repeat: no-repeat;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  display: none; /* 初期状態では非表示 */
 }
 
 #hintImage.show {
-  opacity: 0.9;
+  opacity: 0.8;
+  pointer-events: auto;
 }
 
 /* クリア表示用 */

@@ -45,13 +45,20 @@ const hintImage = document.getElementById("hintImage");
 const difficulty = folder.split("/")[1].replace("_images", "");
 
 hintBtn.addEventListener("click", () => {
-  hintImage.style.display = "block";  
-  hintImage.style.backgroundImage = `url(${folder}/${difficulty}.jpg)`;
-  hintImage.style.backgroundSize = "cover";
-  hintImage.style.backgroundPosition = "center";
+  const isShown = hintImage.classList.toggle("show");
 
-  hintImage.classList.toggle("show");
-});
+  // 背景画像は常にセット（初回クリック時に必要）
+  hintImage.style.backgroundImage = `url(${folder}/${difficulty}.jpg)`;
+
+  if (isShown) {
+    hintImage.style.display = "block";
+    hintBtn.textContent = "ヒントを閉じる";
+  } else {
+    hintImage.style.display = "none";
+    hintBtn.textContent = "ヒントを表示";
+  }
+
+  });
 
 
 
