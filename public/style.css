@@ -89,6 +89,28 @@ button:hover {
   transform: translateY(-2px);
 }
 
+/* ヒント画像表示用 */
+#hintImage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 350px;      /* 画像の見やすい大きさ。必要に応じて調整 */
+  height: 350px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none; /* 押せないように */
+  transition: opacity 0.4s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+#hintImage.show {
+  opacity: 0.9;
+}
+
 /* クリア表示用 */
 #clearMessage {
   margin-top: 20px;

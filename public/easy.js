@@ -36,10 +36,26 @@ function init() {
   shuffleTiles();
 }
 
+// ヒント画像表示機能
+const hintBtn = document.getElementById("hintBtn");
+const hintImage = document.getElementById("hintImage");
+const difficulty = folder.split("/")[1].replace("_images", "");
+
+hintBtn.addEventListener("click", () => {
+  hintImage.style.display = "block";  
+  hintImage.style.backgroundImage = `url(${folder}/${difficulty}.jpg)`;
+  hintImage.style.backgroundSize = "cover";
+  hintImage.style.backgroundPosition = "center";
+
+  hintImage.classList.toggle("show");
+});
+
+
+
 function shuffleTiles() {
   let blankIndex = size * size - 1;
   const moves = [-1, 1, -size, size]; // 左右上下
-  for (let k = 0; k < 500; k++) { // 適度にシャッフル
+  for (let k = 0; k < 300; k++) { // 適度にシャッフル
     const possible = moves
       .map(m => blankIndex + m)
       .filter(n => n >= 0 && n < size * size && !(blankIndex % size === 0 && n === blankIndex - 1) && !(blankIndex % size === size - 1 && n === blankIndex + 1));
