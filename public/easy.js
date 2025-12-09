@@ -57,9 +57,7 @@ hintBtn.addEventListener("click", () => {
     hintImage.style.display = "none";
     hintBtn.textContent = "ヒントを表示";
   }
-
   });
-
 
 
 function shuffleTiles() {

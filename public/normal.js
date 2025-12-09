@@ -5,6 +5,9 @@ const folder = "images/normal_images";
 const tiles = [];
 
 function init() {
+    // ★追加：分割数を CSS に反映 
+  document.documentElement.style.setProperty('--cols', size);
+
   const table = document.getElementById("table");
   table.innerHTML = "";
   tiles.length = 0;
@@ -36,6 +39,27 @@ function init() {
   shuffleTiles();
 }
 
+// ヒント画像表示機能
+const hintBtn = document.getElementById("hintBtn");
+const hintImage = document.getElementById("hintImage");
+const difficulty = folder.split("/")[1].replace("_images", "");
+
+hintBtn.addEventListener("click", () => {
+  const isShown = hintImage.classList.toggle("show");
+
+  // 背景画像は常にセット（初回クリック時に必要）
+  hintImage.style.backgroundImage = `url(${folder}/${difficulty}.jpg)`;
+
+  if (isShown) {
+    hintImage.style.display = "block";
+    hintBtn.textContent = "ヒントを閉じる";
+  } else {
+    hintImage.style.display = "none";
+    hintBtn.textContent = "ヒントを表示";
+  }
+  });
+
+  
 function shuffleTiles() {
   let blankIndex = size * size - 1;
   const moves = [-1, 1, -size, size]; // 左右上下
