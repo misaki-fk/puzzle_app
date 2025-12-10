@@ -141,3 +141,56 @@ button:hover {
 #clearMessage.show {
   opacity: 1;
 }
+
+/* ⭐ひらひら落下＋強い3D回転 */
+@keyframes confetti-fall-slow {
+  0%   { transform: translate3d(0, -10vh, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  50%  { transform: translate3d(20px, 50vh, 0) rotateX(180deg) rotateY(360deg) rotateZ(90deg); }
+  100% { transform: translate3d(-40px, 105vh, 0) rotateX(720deg) rotateY(540deg) rotateZ(300deg); }
+}
+
+@keyframes confetti-fall-medium {
+  0%   { transform: translate3d(0, -10vh, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  50%  { transform: translate3d(-30px, 50vh, 0) rotateX(300deg) rotateY(360deg) rotateZ(200deg); }
+  100% { transform: translate3d(50px, 105vh, 0) rotateX(900deg) rotateY(720deg) rotateZ(480deg); }
+}
+
+@keyframes confetti-fall-fast {
+  0%   { transform: translate3d(0, -10vh, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  50%  { transform: translate3d(50px, 50vh, 0) rotateX(360deg) rotateY(200deg) rotateZ(300deg); }
+  100% { transform: translate3d(-80px, 105vh, 0) rotateX(1200deg) rotateY(800deg) rotateZ(540deg); }
+}
+
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  perspective: 800px;
+  overflow: hidden;
+  z-index: 999;
+}
+
+/* 紙吹雪の共通スタイル */
+.confetti {
+  position: absolute;
+  top: -10px;
+  transform-style: preserve-3d;
+  border-radius: 2px;
+}
+
+/* Sassの & 記法をやめて普通のクラスに */
+.confetti--animation-slow {
+  animation: confetti-fall-slow 2.8s linear forwards;
+}
+
+.confetti--animation-medium {
+  animation: confetti-fall-medium 2.2s linear forwards;
+}
+
+.confetti--animation-fast {
+  animation: confetti-fall-fast 1.7s linear forwards;
+}

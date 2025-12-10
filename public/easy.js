@@ -119,6 +119,7 @@ function checkClear() {
 
   cleared = true;
   // 0.1秒後にクリア画面に遷移
+
   setTimeout(() => {
     location.href = "clear.html?level=easy";
   }, 100);
@@ -149,4 +150,5 @@ function setTilesSolved() {
 
   checkClear();
 }
+
 

@@ -55,6 +55,7 @@
   <!-- X共有ボタン -->
   <button id="shareX">Xで共有する</button>
   <button onclick="location.href='index.html'">トップに戻る</button>
+  <div id="confetti" class="confetti"></div>
 
   <script>
     // URLパラメータからレベル取得
@@ -64,6 +65,41 @@
     // 完成画像を設定
     const img = document.getElementById("clearImage");
     img.src = `images/${level}_images/${level}.jpg`;
+
+    // コンフェッティアニメーション開始
+    function startConfetti() {
+      const container = document.createElement("div");
+      container.className = "confetti-container";
+      document.body.appendChild(container);
+
+      const colors = ['#EF2964', '#00C09D', '#2D87B0', '#48485E','#EFFF1D'];
+      const animations = ['slow', 'medium', 'fast'];
+
+      const interval = setInterval(() => {
+      const confetti = document.createElement("div");
+      const size = Math.floor(Math.random() * 6) + 8; // 8〜14px
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const animation = animations[Math.floor(Math.random() * animations.length)];
+      const left = Math.random() * 100; // 左幅%
+
+      confetti.className = `confetti confetti--animation-${animation}`;
+      confetti.style.width = `${size}px`;
+      confetti.style.height = `${size * 0.6}px`;
+      confetti.style.backgroundColor = color;
+      confetti.style.left = `${left}vw`;
+
+      container.appendChild(confetti);
+
+    // 落下終了後削除
+      setTimeout(() => confetti.remove(), 3500);
+    }, 40);
+
+    // 4秒後に生成停止
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 4000);
+  }
+    startConfetti();
 
     // X共有ボタン
     document.getElementById("shareX").addEventListener("click", () => {
