@@ -7,7 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} 
 
 html,body {
   min-height:100vh; 
@@ -125,6 +125,9 @@ button:hover {
   text-align: left;
   display: inline-block;
   font-size: 14px;
+  font-weight: bold;
+  color: #0044aa;
+  font-family: 'Noto Sans JP', sans-serif;
   line-height: 1.6;
   margin: 10px 0;
   padding-left: 20px;
@@ -227,4 +230,44 @@ button:hover {
 
 .confetti--animation-fast {
   animation: confetti-fall-fast 1.7s linear forwards;
+}
+
+.bubble-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bubble {
+  position: fixed;
+  bottom: -20vh;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #ffffffcc 0%, #ffffff55 35%, #00000011 70%, transparent 100%),
+    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.25), transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(150,200,255,0.15), transparent 70%);
+
+  backdrop-filter: blur(2px); /* 屈折感 */
+  mix-blend-mode: screen;
+  animation: floatUp var(--duration) linear infinite;
+  filter: drop-shadow(0 0px 10px rgba(255, 255, 255, 0.4));
+  opacity: 0.9;
+}
+
+/* シャボン玉がゆらゆら上昇するアニメーション */
+@keyframes floatUp {
+  0% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+  50% {
+    transform: translateX(var(--drift)) translateY(-50vh) scale(1.2);
+  }
+  100% {
+    transform: translateX(calc(var(--drift) * 2)) translateY(-100vh) scale(0.8);
+    opacity: 0;
+  }
 }
