@@ -1,14 +1,27 @@
-// 共通 BGMオブジェクト
-const bgm = new Audio("sounds/bgm.mp3");
-bgm.loop = true;
-bgm.volume = 0.4;
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = new Audio("sounds/bgm.mp3");
+  audio.loop = true;
+  audio.volume = 1.0;
+  audio.muted = true; // 最初は muted（規制回避）
 
-// どこかでボタンを押したら再生開始
-export function startBgm() {
-  bgm.play();
-}
+  window.BGM_AUDIO = audio;
 
-// ミュート切り替え（必要なら）
-export function toggleMute() {
-  bgm.muted = !bgm.muted;
-}
+  // 最初のワンクリックで再生開始 & unmute
+  document.body.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play().then(() => {
+        audio.muted = false;
+      });
+    }
+  }, { once: true });
+
+  // ミュートボタン
+  const btn = document.getElementById("mute-btn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      audio.muted = !audio.muted;
+      btn.textContent = audio.muted ? "🔇" : "🔊";
+    });
+  }
+});
+
