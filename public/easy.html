@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<audio id="bgm" src="public/sounds/bgm.mp3" autoplay loop muted></audio>
+<audio id="bgm" src="bgm.mp3" autoplay loop muted></audio>
+<audio id="seMove" src="sounds/move.mp3"></audio>  <!-- ← これが抜けていた！ -->
+
 <button id="mute-btn" class="mute-btn">🔇</button>
 
 <h1 style="text-align:center">スライドパズル - Easy (3×3)</h1>
@@ -17,10 +19,7 @@
   <div id="hintImage"></div>
 </div>
 
-
 <button id="hintBtn">ヒントを表示</button>
-
-<!-- テスト用ボタン -->
 <button id="testClear">テストで即クリア</button>
 
 <button class="back-btn" onclick="location.href='index.html'">
@@ -31,3 +30,4 @@
 <script src="bgm.js" defer></script>
 </body>
 </html>
+

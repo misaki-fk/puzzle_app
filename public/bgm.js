@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-
   // -------- BGM 初期化 --------
   if (!window.BGM_AUDIO) {
     const audio = new Audio("sounds/bgm.mp3");
@@ -30,10 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // -------- メニューボタン効果音 + 遷移 --------
-  const seClick = document.getElementById("se-click-audio");
-  const menuButtons = document.querySelectorAll(".menu-btn");
+// -------- メニューボタン効果音 + 遷移 --------
+const seClick = document.getElementById("se-click-audio");
+const menuButtons = document.querySelectorAll(".menu-btn");
 
+// メニューが存在しないページ（ゲーム画面）ではスキップ
+if (menuButtons.length > 0) {
   menuButtons.forEach(button => {
     button.addEventListener("click", () => {
 
@@ -52,10 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
         bgm.muted = keepMuted;
       }, 10);
 
-      // 遷移（効果音が鳴る時間のため 130ms 遅らせ）
+      // 遷移
       setTimeout(() => {
         location.href = link;
       }, 130);
     });
   });
-});
+}

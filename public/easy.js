@@ -78,14 +78,40 @@ function clickTile(e) {
   if (i == null) return;
 
   const blank = size * size - 1;
+  let moved = false; // ← 動いたかどうかチェック
 
-  if (i - size >= 0 && tiles[i - size].value === blank) swap(i, i - size);
-  else if (i + size < tiles.length && tiles[i + size].value === blank) swap(i, i + size);
-  else if (i % size !== 0 && tiles[i - 1].value === blank) swap(i, i - 1);
-  else if (i % size !== size - 1 && tiles[i + 1].value === blank) swap(i, i + 1);
+  if (i - size >= 0 && tiles[i - size].value === blank) {
+    swap(i, i - size);
+    moved = true;
+  }
+  else if (i + size < tiles.length && tiles[i + size].value === blank) {
+    swap(i, i + size);
+    moved = true;
+  }
+  else if (i % size !== 0 && tiles[i - 1].value === blank) {
+    swap(i, i - 1);
+    moved = true;
+  }
+  else if (i % size !== size - 1 && tiles[i + 1].value === blank) {
+    swap(i, i + 1);
+    moved = true;
+  }
+
+  // 🔊 タイルが本当に動いたときだけ音を鳴らす
+  if (moved) {
+    const seMove = document.getElementById("seMove");
+
+    // BGM がミュートなら SE もミュートにする
+    const bgm = document.getElementById("bgm");
+    seMove.muted = bgm.muted;
+
+    seMove.currentTime = 0; // 毎回 先頭から再生
+    seMove.play();
+  }
 
   checkClear();
 }
+
 
 function swap(i, j) {
   const tmpVal = tiles[i].value;
