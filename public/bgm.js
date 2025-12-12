@@ -1,27 +1,61 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const audio = new Audio("sounds/bgm.mp3");
-  audio.loop = true;
-  audio.volume = 1.0;
-  audio.muted = true; // 最初は muted（規制回避）
 
-  window.BGM_AUDIO = audio;
+  // -------- BGM 初期化 --------
+  if (!window.BGM_AUDIO) {
+    const audio = new Audio("sounds/bgm.mp3");
+    audio.loop = true;
+    audio.muted = true;
+    audio.volume = 1.0;
+    audio.play().catch(() => {});
+    window.BGM_AUDIO = audio;
 
-  // 最初のワンクリックで再生開始 & unmute
-  document.body.addEventListener("click", () => {
-    if (audio.paused) {
-      audio.play().then(() => {
-        audio.muted = false;
-      });
+    // ミュート状態の保持
+    if (window.BGM_FORCE_MUTED === undefined) {
+      window.BGM_FORCE_MUTED = true;
     }
-  }, { once: true });
 
-  // ミュートボタン
+    audio.muted = window.BGM_FORCE_MUTED;
+  }
+
+  const bgm = window.BGM_AUDIO;
+
+  // -------- ミュートボタン --------
   const btn = document.getElementById("mute-btn");
   if (btn) {
+    btn.textContent = bgm.muted ? "🔇" : "🔊";
     btn.addEventListener("click", () => {
-      audio.muted = !audio.muted;
-      btn.textContent = audio.muted ? "🔇" : "🔊";
+      bgm.muted = !bgm.muted;
+      window.BGM_FORCE_MUTED = bgm.muted;
+      btn.textContent = bgm.muted ? "🔇" : "🔊";
     });
   }
-});
 
+  // -------- メニューボタン効果音 + 遷移 --------
+  const seClick = document.getElementById("se-click-audio");
+  const menuButtons = document.querySelectorAll(".menu-btn");
+
+  menuButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+      // 効果音
+      if (seClick) {
+        seClick.currentTime = 0;
+        seClick.play().catch(() => {});
+      }
+
+      const link = button.dataset.link;
+
+      // BGM ミュート状態保持
+      const keepMuted = window.BGM_FORCE_MUTED;
+
+      setTimeout(() => {
+        bgm.muted = keepMuted;
+      }, 10);
+
+      // 遷移（効果音が鳴る時間のため 130ms 遅らせ）
+      setTimeout(() => {
+        location.href = link;
+      }, 130);
+    });
+  });
+});
