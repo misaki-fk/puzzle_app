@@ -78,7 +78,7 @@ document.getElementById("downloadAll").addEventListener("click", async () => {
       }, "image/jpeg");
     });
     // 連続クリックが早すぎると反応しない場合があるので少し待つ
-    await new Promise(r => setTimeout(r, 50));
+    await new Promise(r => setTimeout(r, 150));
   }
 });
 </script>

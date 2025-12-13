@@ -63,7 +63,7 @@ hintBtn.addEventListener("click", () => {
 function shuffleTiles() {
   let blankIndex = size * size - 1;
   const moves = [-1, 1, -size, size]; // 左右上下
-  for (let k = 0; k < 300; k++) { // 適度にシャッフル
+  for (let k = 0; k < 200; k++) { // 適度にシャッフル
     const possible = moves
       .map(m => blankIndex + m)
       .filter(n => n >= 0 && n < size * size && !(blankIndex % size === 0 && n === blankIndex - 1) && !(blankIndex % size === size - 1 && n === blankIndex + 1));
@@ -78,14 +78,40 @@ function clickTile(e) {
   if (i == null) return;
 
   const blank = size * size - 1;
+  let moved = false;
 
-  if (i - size >= 0 && tiles[i - size].value === blank) swap(i, i - size);
-  else if (i + size < tiles.length && tiles[i + size].value === blank) swap(i, i + size);
-  else if (i % size !== 0 && tiles[i - 1].value === blank) swap(i, i - 1);
-  else if (i % size !== size - 1 && tiles[i + 1].value === blank) swap(i, i + 1);
+  if (i - size >= 0 && tiles[i - size].value === blank) {
+    swap(i, i - size);
+    moved = true;
+  }
+  else if (i + size < tiles.length && tiles[i + size].value === blank) {
+    swap(i, i + size);
+    moved = true;
+  }
+  else if (i % size !== 0 && tiles[i - 1].value === blank) {
+    swap(i, i - 1);
+    moved = true;
+  }
+  else if (i % size !== size - 1 && tiles[i + 1].value === blank) {
+    swap(i, i + 1);
+    moved = true;
+  }
+
+  // 🔊 タイルが動いたときだけ効果音
+  if (moved) {
+    const seMove = document.getElementById("seMove");
+    const bgm = window.BGM_AUDIO; // ← ここが超重要
+
+    if (seMove) {
+      seMove.muted = bgm?.muted ?? false;
+      seMove.currentTime = 0;
+      seMove.play().catch(() => {});
+    }
+  }
 
   checkClear();
 }
+
 
 function swap(i, j) {
   const tmpVal = tiles[i].value;
