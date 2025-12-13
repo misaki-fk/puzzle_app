@@ -3,7 +3,7 @@
 const size = 4;
 const folder = "images/normal_images";
 const tiles = [];
-const boardSize = document.getElementById("board").clientWidth;
+const boardSize = document.getElementById("table").clientWidth;
 const tileSize = boardSize / size;
 tile.style.width = tileSize + "px";
 tile.style.height = tileSize + "px";
