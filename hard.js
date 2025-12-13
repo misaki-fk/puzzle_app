@@ -3,6 +3,12 @@
 const size = 5;
 const folder = "images/hard_images";
 const tiles = [];
+const boardSize = document.getElementById("board").clientWidth;
+const tileSize = boardSize / size;
+tile.style.width = tileSize + "px";
+tile.style.height = tileSize + "px";
+
+
 
 function init() {
       // ★追加：分割数を CSS に反映
