@@ -39,6 +39,7 @@ p {
 #puzzleWrapper {
   width: min(90vw, 360px);
   aspect-ratio: 1 / 1;
+  min-height: 280px;
   margin: 20px auto;
   position: relative; /* これが基準！ */
 }
