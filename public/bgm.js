@@ -21,10 +21,18 @@
   const btn = document.getElementById("mute-btn");
   if (btn) {
     btn.textContent = bgm.muted ? "🔇" : "🔊";
+
     btn.addEventListener("click", () => {
+      const willUnmute = bgm.muted;
+
       bgm.muted = !bgm.muted;
       window.BGM_FORCE_MUTED = bgm.muted;
       btn.textContent = bgm.muted ? "🔇" : "🔊";
+
+    // ★ ここを追加
+    if (willUnmute) {
+      bgm.play().catch(() => {});
+    }
     });
   }
 
