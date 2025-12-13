@@ -104,7 +104,7 @@
 
     // X共有ボタン
     document.getElementById("shareX").addEventListener("click", () => {
-      const text = encodeURIComponent(`スライドパズル (${level}) をクリアしました！ #スライドパズル`);
+      const text = encodeURIComponent(`スライドパズル 【${level}】 をクリアしました！🧩 #スライドパズル`);
       const url = encodeURIComponent(window.location.href);
       const shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
       window.open(shareUrl, "_blank");
