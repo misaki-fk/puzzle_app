@@ -11,23 +11,24 @@
 <audio id="seMove" src="sounds/move.mp3"></audio>
 
 <button id="mute-btn" class="mute-btn">🔇</button>
+<div class="game-container">
+  <h1 style="text-align:center">スライドパズル - Normal (4×4)</h1>
 
-<h1 style="text-align:center">スライドパズル - Normal (4×4)</h1>
 
+  <div id="puzzleWrapper">
+    <table id="table"></table>
+    <div id="hintImage"></div>
+  </div>
 
-<div id="puzzleWrapper">
-  <table id="table"></table>
-  <div id="hintImage"></div>
-</div>
-
-<button id="hintBtn">ヒントを表示</button>
+  <button id="hintBtn">ヒントを表示</button>
 
 <!-- テスト用ボタン -->
 <!-- <button id="testClear">テストで即クリア</button> -->
 
-<button class="back-btn" onclick="location.href='index.html'">
-  タイトルへ戻る
-</button>
+  <button class="back-btn" onclick="location.href='index.html'">
+    タイトルへ戻る
+  </button>
+</div>
 
 <script src="normal.js"></script>
 <script src="bgm.js" defer></script>
