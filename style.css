@@ -5,13 +5,18 @@ body {
   margin: 0;
   padding: 0;
   text-align: center; 
-  flex-direction: column;
-  align-items: center;
 } 
 
 html,body {
   min-height:100vh; 
 }
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 /* タイトル */
 h1 {
