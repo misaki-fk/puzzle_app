@@ -44,6 +44,7 @@
 * HTML
 * CSS
 * JavaScript
+* BGM:SUNO AI
 * GitHub Pages（デプロイ）
 
 ---
