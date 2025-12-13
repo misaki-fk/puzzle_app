@@ -78,7 +78,7 @@ function clickTile(e) {
   if (i == null) return;
 
   const blank = size * size - 1;
-  let moved = false; // ← 動いたかどうかチェック
+  let moved = false;
 
   if (i - size >= 0 && tiles[i - size].value === blank) {
     swap(i, i - size);
@@ -97,20 +97,21 @@ function clickTile(e) {
     moved = true;
   }
 
-  // 🔊 タイルが本当に動いたときだけ音を鳴らす
+  // 🔊 タイルが動いたときだけ効果音
   if (moved) {
     const seMove = document.getElementById("seMove");
+    const bgm = window.BGM_AUDIO; // ← ここが超重要
 
-    // BGM がミュートなら SE もミュートにする
-    const bgm = document.getElementById("bgm");
-    seMove.muted = bgm.muted;
-
-    seMove.currentTime = 0; // 毎回 先頭から再生
-    seMove.play();
+    if (seMove) {
+      seMove.muted = bgm?.muted ?? false;
+      seMove.currentTime = 0;
+      seMove.play().catch(() => {});
+    }
   }
 
   checkClear();
 }
+
 
 
 function swap(i, j) {
@@ -176,5 +177,3 @@ function setTilesSolved() {
 
   checkClear();
 }
-
-
